@@ -7,6 +7,12 @@ services:
     volumes:
       - /app/node_modules
       - ./client:/app
+    environment:
+      - REACT_APP_GRAPHCOOL_DOMAIN=https://api.graph.cool/simple/v1/cjlff3bsb7fmj0168pxtlhf63
+      - REACT_APP_DOMAIN=http://localhost:3050
+      - REACT_APP_AUTH0_DOMAIN=drew-test.auth0.com
+      - REACT_APP_AUTH0_CLIENT_ID=wGaDG7NRFvq7anbeqa7XSozCau8cPUJa
+      - REACT_APP_AUTH0_HOST=http://localhost:8080
   nginx:
     restart: always
     build:

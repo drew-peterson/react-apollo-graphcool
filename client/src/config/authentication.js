@@ -1,14 +1,11 @@
 import Auth0Lock from "auth0-lock";
 import { client } from "./apollo";
 import { AUTH_USER, USER } from "graphql/query";
-
-const DOMAIN = "drew-test.auth0.com";
-const CLIENT_ID = "wGaDG7NRFvq7anbeqa7XSozCau8cPUJa";
-const HOST = "http://localhost:8080"; // auth0 api i
+import keys from "config/keys";
 
 export default class Auth {
   constructor() {
-    this.lock = new Auth0Lock(CLIENT_ID, DOMAIN, {
+    this.lock = new Auth0Lock(keys.AUTH0_CLIENT_ID, keys.AUTH0_DOMAIN, {
       autoclose: true,
       allowAutocomplete: true,
       // closable: false,
@@ -17,10 +14,10 @@ export default class Auth {
         primaryColor: "#31324F"
       },
       auth: {
-        audience: HOST,
+        audience: keys.AUTH0_HOST,
         responseType: "token",
         sso: true,
-        redirectUrl: "http://localhost:3050/",
+        redirectUrl: keys.DOMAIN,
         redirect: true
       }
     });

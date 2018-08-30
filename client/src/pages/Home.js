@@ -1,9 +1,16 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class Home extends Component {
   state = {
     error: false
   };
+
+  async componentDidMount() {
+    const res = await axios.get("/api/");
+    console.log("res", res);
+  }
+
   render() {
     // console.log("this.props", this.props);
     if (this.state.error) {

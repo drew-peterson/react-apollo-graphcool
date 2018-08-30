@@ -32,7 +32,7 @@ class Header extends React.Component {
             </NavLink>
 
             <Query query={USER}>
-              {({ loading, data: { user } }) => {
+              {({ loading, data: { user }, error }) => {
                 if (loading) return <span />;
                 if (!user) {
                   return (

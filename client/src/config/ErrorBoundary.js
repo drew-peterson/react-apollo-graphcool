@@ -20,10 +20,8 @@ class ErrorBoundary extends React.Component {
       return (
         <Container textAlign="center" text>
           <Message negative style={{ marginTop: "20%" }}>
-            <Message.Header>
-              We're sorry we can't apply that discount
-            </Message.Header>
-            <p>That offer has expired</p>
+            <Message.Header>Oops something went wrong...</Message.Header>
+            <p>secondary error message</p>
           </Message>
           <Button onClick={() => window.location.replace("/")}>Home</Button>
         </Container>
