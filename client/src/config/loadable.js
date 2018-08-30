@@ -6,9 +6,9 @@ function Loading(props) {
   if (props.error) {
     return (
       <Container text textAlign="center">
-        <Header as="h2">Error</Header>
+        <Header as="h2">Error Loading Page</Header>
         <Button primary onClick={props.retry}>
-          Retry
+          Try Again
         </Button>
       </Container>
     );

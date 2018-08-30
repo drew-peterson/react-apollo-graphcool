@@ -1,36 +1,24 @@
 import React from "react";
 import { Container, Button, Menu, Segment } from "semantic-ui-react";
-import Lock from "../../config/authentication";
+import { Query } from "react-apollo";
+import { NavLink } from "react-router-dom";
+import Lock from "config/authentication";
+import { USER } from "graphql/query";
 
 class Header extends React.Component {
-  state = {
-    auth: ""
-  };
+  state = { auth: "" };
   componentDidMount() {
     const auth = new Lock();
     this.setState({ auth });
   }
 
-  signUp = () => {
-    this.state.auth.show({ initialScreen: "signUp" });
-  };
-
-  login = () => {
-    this.state.auth.show({ initialScreen: "login" });
-  };
-
   logout = () => {
     this.state.auth.logout();
   };
-
   render() {
-    const { children, fixed = false } = this.props;
+    const { fixed = false } = this.props;
     return (
-      <Segment
-        inverted
-        textAlign="center" // style={{ minHeight: 700, padding: "1em 0em" }}
-        vertical
-      >
+      <Segment inverted textAlign="center" vertical>
         <Menu
           fixed={fixed ? "top" : null}
           inverted={!fixed}
@@ -39,23 +27,53 @@ class Header extends React.Component {
           size="large"
         >
           <Container>
-            <Menu.Item active>Home</Menu.Item>
-            <Menu.Item position="right">
-              <Button inverted={!fixed} onClick={this.login}>
-                Log in
-              </Button>
-              <Button
-                inverted={!fixed}
-                primary={fixed}
-                style={{ marginLeft: "0.5em" }}
-                onClick={this.signUp}
-              >
-                Sign Up
-              </Button>
-            </Menu.Item>
+            <NavLink exact className="item" to="/" activeClassName="active">
+              Home
+            </NavLink>
+
+            <Query query={USER}>
+              {({ loading, data: { user } }) => {
+                if (loading) return <span />;
+                if (!user) {
+                  return (
+                    <Menu.Item position="right">
+                      <Button inverted={!fixed}>
+                        <NavLink to="/auth">Log in</NavLink>
+                      </Button>
+                      <Button
+                        inverted={!fixed}
+                        primary={fixed}
+                        style={{ marginLeft: "0.5em" }}
+                      >
+                        <NavLink to="/auth">Sign Up</NavLink>
+                      </Button>
+                    </Menu.Item>
+                  );
+                }
+                return (
+                  <React.Fragment>
+                    <NavLink
+                      className="item"
+                      to="/user"
+                      activeClassName="active"
+                    >
+                      User
+                    </NavLink>
+                    <Menu.Item position="right">
+                      <Button
+                        inverted={!fixed}
+                        primary={fixed}
+                        onClick={this.logout}
+                      >
+                        Logout
+                      </Button>
+                    </Menu.Item>
+                  </React.Fragment>
+                );
+              }}
+            </Query>
           </Container>
         </Menu>
-        {/* <HomepageHeading /> */}
       </Segment>
     );
   }

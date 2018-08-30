@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Routing from "../config/routing";
+import Routing from "config/routing";
 import { Container } from "semantic-ui-react";
-import Header from "../components/navigation/Header";
+import Header from "components/navigation/Header";
 import { BrowserRouter } from "react-router-dom";
-import { Provider } from "../config/apollo";
-import ErrorBoundary from "../config/ErrorBoundary";
+import { Provider } from "config/apollo";
+import ErrorBoundary from "config/ErrorBoundary";
 
 class App extends Component {
   render() {

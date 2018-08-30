@@ -5,12 +5,20 @@ import loadable from "./loadable";
 
 // react overdrive : anmations between pages if element exists on both pages. Like an image moving up.
 
-const Test = loadable({
-  loader: () => import("../pages/Test")
+const Home = loadable({
+  loader: () => import("pages/Home")
 });
 
 const Logout = loadable({
-  loader: () => import("../pages/Logout")
+  loader: () => import("pages/Logout")
+});
+
+const Auth = loadable({
+  loader: () => import("pages/Auth")
+});
+
+const User = loadable({
+  loader: () => import("pages/User")
 });
 
 const routing = [
@@ -18,13 +26,25 @@ const routing = [
     id: 1,
     path: "/",
     exact: true,
-    component: Test,
+    component: Home,
     meta: { title: "TITLE HERE", description: "DESCRIPTION HERE", image: "" }
   },
   {
     id: 3,
     path: "/logout",
     component: Logout,
+    meta: { title: "TITLE HERE", description: "DESCRIPTION HERE", image: "" }
+  },
+  {
+    id: 4,
+    path: "/auth",
+    component: Auth,
+    meta: { title: "TITLE HERE", description: "DESCRIPTION HERE", image: "" }
+  },
+  {
+    id: 5,
+    path: "/user",
+    component: User,
     meta: { title: "TITLE HERE", description: "DESCRIPTION HERE", image: "" }
   }
 ];
