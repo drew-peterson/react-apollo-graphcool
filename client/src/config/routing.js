@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import withHelmet from "./withHelmet";
 import loadable from "./loadable";
 
@@ -7,6 +7,10 @@ import loadable from "./loadable";
 
 const Test = loadable({
   loader: () => import("../pages/Test")
+});
+
+const Logout = loadable({
+  loader: () => import("../pages/Logout")
 });
 
 const routing = [
@@ -18,24 +22,22 @@ const routing = [
     meta: { title: "TITLE HERE", description: "DESCRIPTION HERE", image: "" }
   },
   {
-    id: 2,
-    path: "/test",
-    component: Test,
+    id: 3,
+    path: "/logout",
+    component: Logout,
     meta: { title: "TITLE HERE", description: "DESCRIPTION HERE", image: "" }
   }
 ];
 
 export default () => (
-  <BrowserRouter>
-    <Switch>
-      {routing.map(({ id, path, exact, component, meta }) => (
-        <Route
-          key={id}
-          path={path}
-          exact={exact}
-          component={withHelmet(component, meta)}
-        />
-      ))}
-    </Switch>
-  </BrowserRouter>
+  <Switch>
+    {routing.map(({ id, path, exact, component, meta }) => (
+      <Route
+        key={id}
+        path={path}
+        exact={exact}
+        component={withHelmet(component, meta)}
+      />
+    ))}
+  </Switch>
 );

@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-import { compose, withProps } from "recompose";
+import { compose } from "recompose";
 import { graphql } from "react-apollo";
-import { Query } from "../config/apollo";
+// import { Query } from "../config/apollo";
 import gql from "graphql-tag";
 const query = gql`
   {
-    posts {
+    user {
       id
-      header
-      description
+      email
     }
   }
 `;
@@ -37,4 +36,5 @@ class Test extends Component {
     );
   }
 }
-export default compose(graphql(query, {}))(Test);
+export default compose()(Test);
+// graphql(query, {})
