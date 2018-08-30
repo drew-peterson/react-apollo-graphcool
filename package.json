@@ -1,0 +1,10 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "docker:up": "docker-compose up",
+    "docker:build": "docker-compose up --build",
+    "docker:clean": "docker-compose rm -f && docker-compose pull && docker-compose up --build"
+  }
+}
