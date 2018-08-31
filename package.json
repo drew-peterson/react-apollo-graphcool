@@ -6,6 +6,6 @@
     "docker:up": "docker-compose up",
     "docker:build": "docker-compose up --build",
     "docker:clean": "docker-compose rm -f  && docker-compose build --no-cache && docker-compose up",
-    "heroku:push": "heroku container:push --recursive --app react-apollo-graphql-docker"
+    "heroku:push": "heroku container:push web server nginx --recursive --app react-apollo-graphql-docker"
   }
 }
