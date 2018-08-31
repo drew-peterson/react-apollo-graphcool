@@ -1,0 +1,35 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  # - docker build -t weeznog/react-apollo-graphcool -f ./client/Dockerfile.dev ./client
+
+script:
+  # - docker run weeznog/react-apollo-graphcool yarn test -- --coverage
+
+after_success:
+  - docker build -t weeznog/apg-client ./client
+  - docker build -t weeznog/apg-nginx ./nginx
+  - docker build -t weeznog/apg-server ./server
+
+  # - Login to docker CLI
+  # vars from travis
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take images and push to docker hub
+  - docker push weeznog/apg-client
+  - docker push weeznog/apg-nginx
+  - docker push weeznog/apg-server
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: react-apollo-graphcool
+  env: ReactApolloGraphcool-env
+  bucket_name: elasticbeanstalk-us-east-2-564159252323 # get from aws s3 bucket, seems to be the same
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
