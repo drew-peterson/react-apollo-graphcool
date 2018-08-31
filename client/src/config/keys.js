@@ -10,6 +10,8 @@
 //   }
 // })();
 
+console.log("KEYS 2", process.env);
+
 export default {
   GRAPHCOOL_URI: process.env.REACT_APP_GRAPHCOOL_DOMAIN,
   DOMAIN: process.env.REACT_APP_DOMAIN,

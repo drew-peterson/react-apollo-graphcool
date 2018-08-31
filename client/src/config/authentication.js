@@ -8,6 +8,7 @@ import keys from "config/keys";
 
 export const Lock = class Lock {
   constructor() {
+    console.log("keys", keys);
     this.lock = new Auth0Lock(keys.AUTH0_CLIENT_ID, keys.AUTH0_DOMAIN, {
       // autoclose: true,
       allowAutocomplete: true,
