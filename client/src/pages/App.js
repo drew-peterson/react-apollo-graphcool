@@ -1,23 +1,35 @@
 import React, { Component } from "react";
 import Routing from "config/routing";
-import { Container } from "semantic-ui-react";
+import { Container, Grid } from "semantic-ui-react";
 import Header from "components/navigation/Header";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "config/apollo";
 import ErrorBoundary from "config/ErrorBoundary";
 
+const Footer = () => (
+  <Container textAlign="center" text style={{ padding: 20 }}>
+    Footer here
+  </Container>
+);
+
 class App extends Component {
   render() {
+    const { Row, Column } = Grid;
     return (
       <ErrorBoundary>
         <Provider>
           <BrowserRouter>
-            <div>
+            <main id="main" style={{ background: "#F5F5F5" }}>
               <Header />
-              <Container style={{ marginTop: "1rem" }}>
-                <Routing />
+              <Container>
+                <Grid padded>
+                  <Grid.Column>
+                    <Routing />
+                  </Grid.Column>
+                </Grid>
               </Container>
-            </div>
+              <Footer />
+            </main>
           </BrowserRouter>
         </Provider>
       </ErrorBoundary>

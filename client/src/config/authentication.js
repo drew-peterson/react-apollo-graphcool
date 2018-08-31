@@ -20,14 +20,15 @@ export const Lock = class Lock {
         audience: keys.AUTH0_HOST,
         responseType: "token",
         sso: true,
-        redirectUrl: keys.DOMAIN
-        // redirect: true
+        redirectUrl: keys.DOMAIN,
+        redirect: true
       }
     });
 
     this.lock.on("authenticated", async function(authResult) {
       console.log("on authenticated", authResult);
 
+      // create or authorize user
       try {
         const {
           data: { authenticateUser }
@@ -36,9 +37,8 @@ export const Lock = class Lock {
           mutation: AUTH_USER
         });
         localStorage.setItem("accessToken", authenticateUser.token); // set token
-
         // update user
-        client.query({
+        await client.query({
           query: USER,
           fetchPolicy: "network-only"
         });

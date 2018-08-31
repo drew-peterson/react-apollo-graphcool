@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Segment } from "semantic-ui-react";
+import { Layout } from "components/common";
 
 class Home extends Component {
   state = {
@@ -7,8 +9,8 @@ class Home extends Component {
   };
 
   async componentDidMount() {
-    const res = await axios.get("/api/");
-    console.log("res", res);
+    const { data } = await axios.get("/api/");
+    console.log("API TEST:", data);
   }
 
   render() {
@@ -18,16 +20,29 @@ class Home extends Component {
     }
 
     return (
-      <div>
-        <h2>Home</h2>
-        <button
-          onClick={() => {
-            this.setState({ error: true });
-          }}
-        >
-          Error
-        </button>
-      </div>
+      <Layout>
+        <Segment style={{ height: 1000 }}>
+          <h2>Home</h2>
+          <p>random test here</p>
+          <p>random test here</p>
+        </Segment>
+        <Segment>
+          <p>random test here</p>
+          <p>random test here</p>
+          <p>random test here</p>
+          <p>random test here</p>
+        </Segment>
+        <Segment>
+          <button
+            onClick={() => {
+              this.setState({ error: true });
+            }}
+          >
+            Error
+          </button>
+          <div>Bottom of container</div>
+        </Segment>
+      </Layout>
     );
   }
 }

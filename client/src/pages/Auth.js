@@ -9,7 +9,7 @@ class Auth extends Component {
   componentDidMount() {
     const { type } = qs.parse(window.location.search);
     const auth = new Lock();
-    auth.show({ initialScreen: type });
+    auth.show({ initialScreen: type || "login" });
   }
 
   render() {
