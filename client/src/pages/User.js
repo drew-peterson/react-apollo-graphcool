@@ -4,7 +4,7 @@ import { USER } from "graphql/query";
 export default () => (
   <Query query={USER}>
     {({ loading, data: { user } }) => {
-      loading && <div />;
+      if (loading) return <div />;
       return <div>Hello {user && user.email}</div>;
     }}
   </Query>

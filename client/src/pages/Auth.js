@@ -8,18 +8,15 @@ import qs from "query-string";
 class Auth extends Component {
   componentDidMount() {
     const { type } = qs.parse(window.location.search);
-    if (!localStorage.getItem("accessToken")) {
-      const auth = new Lock();
-      auth.show({ initialScreen: type });
-    }
+    const auth = new Lock();
+    auth.show({ initialScreen: type });
   }
 
   render() {
     return (
       <Query query={USER}>
         {({ data: { user } }) => {
-          user && <Redirect to="/" />;
-          return <div id="hiw-login-container" />;
+          return user ? <Redirect to="/" /> : <div id="hiw-login-container" />;
         }}
       </Query>
     );

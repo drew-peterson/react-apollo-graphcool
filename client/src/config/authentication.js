@@ -9,7 +9,7 @@ import keys from "config/keys";
 export const Lock = class Lock {
   constructor() {
     this.lock = new Auth0Lock(keys.AUTH0_CLIENT_ID, keys.AUTH0_DOMAIN, {
-      autoclose: true,
+      // autoclose: true,
       allowAutocomplete: true,
       // closable: false,
       container: "hiw-login-container",
@@ -20,8 +20,8 @@ export const Lock = class Lock {
         audience: keys.AUTH0_HOST,
         responseType: "token",
         sso: true,
-        redirectUrl: keys.DOMAIN,
-        redirect: true
+        redirectUrl: keys.DOMAIN
+        // redirect: true
       }
     });
 
@@ -69,9 +69,10 @@ export const authRequired = WrappedComponent => {
       return (
         <Query query={USER}>
           {({ loading, data: { user } }) => {
-            loading && <div />;
-            user && <WrappedComponent {...this.props} />;
-            return <Redirect to="/" />;
+            if (loading) return <div>loading...</div>;
+            if (user) return <WrappedComponent {...this.props} />;
+            localStorage.setItem("accessToken", "");
+            return <Redirect to="/auth?type=type" />;
           }}
         </Query>
       );
