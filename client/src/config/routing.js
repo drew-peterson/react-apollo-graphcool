@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import withHelmet from "./withHelmet";
 import loadable from "./loadable";
+import { authRequired } from "config/authentication";
 
 // react overdrive : anmations between pages if element exists on both pages. Like an image moving up.
 
@@ -23,37 +24,33 @@ const User = loadable({
 
 const routing = [
   {
-    id: 1,
     path: "/",
     exact: true,
     component: Home,
     meta: { title: "TITLE HERE", description: "DESCRIPTION HERE", image: "" }
   },
   {
-    id: 3,
     path: "/logout",
     component: Logout,
     meta: { title: "TITLE HERE", description: "DESCRIPTION HERE", image: "" }
   },
   {
-    id: 4,
     path: "/auth",
     component: Auth,
     meta: { title: "TITLE HERE", description: "DESCRIPTION HERE", image: "" }
   },
   {
-    id: 5,
     path: "/user",
-    component: User,
+    component: authRequired(User),
     meta: { title: "TITLE HERE", description: "DESCRIPTION HERE", image: "" }
   }
 ];
 
 export default () => (
   <Switch>
-    {routing.map(({ id, path, exact, component, meta }) => (
+    {routing.map(({ path, exact, component, meta }) => (
       <Route
-        key={id}
+        key={path}
         path={path}
         exact={exact}
         component={withHelmet(component, meta)}

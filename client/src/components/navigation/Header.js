@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Button, Menu, Segment } from "semantic-ui-react";
 import { Query } from "react-apollo";
 import { NavLink } from "react-router-dom";
-import Lock from "config/authentication";
+import { Lock } from "config/authentication";
 import { USER } from "graphql/query";
 
 class Header extends React.Component {
@@ -37,16 +37,20 @@ class Header extends React.Component {
                 if (!user) {
                   return (
                     <Menu.Item position="right">
-                      <Button inverted={!fixed}>
-                        <NavLink to="/auth">Log in</NavLink>
-                      </Button>
-                      <Button
-                        inverted={!fixed}
-                        primary={fixed}
+                      <NavLink
+                        className="ui inverted button"
+                        to="/auth?type=login"
+                      >
+                        Log in
+                      </NavLink>
+
+                      <NavLink
+                        className="ui inverted button"
+                        to="/auth?type=signUp"
                         style={{ marginLeft: "0.5em" }}
                       >
-                        <NavLink to="/auth">Sign Up</NavLink>
-                      </Button>
+                        Sign Up
+                      </NavLink>
                     </Menu.Item>
                   );
                 }

@@ -1,9 +1,12 @@
+import React from "react";
 import Auth0Lock from "auth0-lock";
 import { client } from "./apollo";
 import { AUTH_USER, USER } from "graphql/query";
+import { Redirect } from "react-router-dom";
+import { Query } from "react-apollo";
 import keys from "config/keys";
 
-export default class Auth {
+export const Lock = class Lock {
   constructor() {
     this.lock = new Auth0Lock(keys.AUTH0_CLIENT_ID, keys.AUTH0_DOMAIN, {
       autoclose: true,
@@ -58,4 +61,21 @@ export default class Auth {
     this.lock.logout();
     localStorage.setItem("accessToken", "");
   }
-}
+};
+
+export const authRequired = WrappedComponent => {
+  class Auth extends React.Component {
+    render() {
+      return (
+        <Query query={USER}>
+          {({ loading, data: { user } }) => {
+            loading && <div />;
+            user && <WrappedComponent {...this.props} />;
+            return <Redirect to="/" />;
+          }}
+        </Query>
+      );
+    }
+  }
+  return Auth;
+};

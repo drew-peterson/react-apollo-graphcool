@@ -25,7 +25,7 @@ export default (WrappedComponent, meta) => {
       return (
         <React.Fragment>
           <Meta meta={meta} />
-          <WrappedComponent {...this.props} />
+          <WrappedComponent />
         </React.Fragment>
       );
     }
