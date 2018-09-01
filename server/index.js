@@ -6,7 +6,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-console.log("ENV", process.env);
 app.get("/", (req, res) => {
   res.send("hi from api");
 });

@@ -3,8 +3,6 @@ import axios from "axios";
 import { Segment } from "semantic-ui-react";
 import { Layout } from "components/common";
 
-console.log("ENV", process.env);
-
 class Home extends Component {
   state = {
     error: false
