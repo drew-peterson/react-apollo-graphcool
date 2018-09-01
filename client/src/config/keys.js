@@ -1,6 +1,5 @@
 export default (function() {
   if (process.env.NODE_ENV === "development") {
-    console.log("KEYS DEV", process.env);
     return {
       GRAPHCOOL_URI: process.env.REACT_APP_GRAPHCOOL_DOMAIN,
       DOMAIN: process.env.REACT_APP_DOMAIN,
@@ -9,7 +8,7 @@ export default (function() {
       AUTH0_HOST: process.env.REACT_APP_AUTH0_HOST
     };
   } else if (process.env.NODE_ENV === "production") {
-    console.log("KEYS PROD", process.env);
+    console.log("PROD ENV", process.env);
     return {
       GRAPHCOOL_URI: process.env.REACT_APP_GRAPHCOOL_DOMAIN,
       DOMAIN: process.env.REACT_APP_DOMAIN,
