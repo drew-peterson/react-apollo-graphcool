@@ -1,6 +1,6 @@
 sudo: required
 env:
-  - REACT_APP_DREW=drewPetersonEnv
+  - REACT_APP_DREW=$DOCKER_ID
 services:
   - docker
 
