@@ -1,6 +1,9 @@
 sudo: required
 env:
   - REACT_APP_DREW=$DOCKER_ID
+  - REACT_APP_EVAN=evanTest
+  global:
+    - REACT_APP_REED=reedTest
 services:
   - docker
 
