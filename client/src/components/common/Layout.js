@@ -1,6 +1,10 @@
 import React from "react";
 import { Container } from "semantic-ui-react";
 
-export const Layout = ({ children }) => {
-  return <Container fluid>{children}</Container>;
+export const Layout = ({ children, ...other }) => {
+  return (
+    <Container {...other} fluid>
+      {children}
+    </Container>
+  );
 };

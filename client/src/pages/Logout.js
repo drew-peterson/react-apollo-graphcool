@@ -1,3 +1,8 @@
 import React from "react";
+import { Layout } from "components/common";
 
-export default () => <h1>logout</h1>;
+export default () => (
+  <Layout data-testid="logout-page">
+    <h1>logout</h1>
+  </Layout>
+);

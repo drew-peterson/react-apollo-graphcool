@@ -9,7 +9,7 @@ class Header extends React.Component {
   state = { auth: "" };
   componentDidMount() {
     const auth = new Lock();
-    this.setState({ auth });
+    this.setState({ auth }); // so i can logout user
   }
 
   logout = () => {

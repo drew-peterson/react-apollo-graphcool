@@ -9,8 +9,12 @@ class Home extends Component {
   };
 
   async componentDidMount() {
-    const { data } = await axios.get("/api/");
-    console.log("API TEST:", data);
+    try {
+      const { data } = await axios.get("/api/");
+      console.log("API TEST:", data);
+    } catch (error) {
+      console.log("err", error.response);
+    }
   }
 
   render() {

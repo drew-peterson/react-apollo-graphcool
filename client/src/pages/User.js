@@ -8,8 +8,10 @@ export default () => (
     {({ loading, data: { user } }) => {
       if (loading) return <div />;
       return (
-        <Layout>
-          <Segment>Hello {user && user.email}</Segment>
+        <Layout data-testid="user-page">
+          <Segment>
+            <h2>Hello {user && user.email}</h2>
+          </Segment>
         </Layout>
       );
     }}
