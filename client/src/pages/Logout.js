@@ -3,6 +3,6 @@ import { Layout } from "components/common";
 
 export default () => (
   <Layout data-testid="logout-page">
-    <h1>logout</h1>
+    <h1>You have sucessfully logged out</h1>
   </Layout>
 );
