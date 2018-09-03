@@ -3,7 +3,7 @@ import "jest-dom/extend-expect";
 import { render, cleanup, fireEvent } from "react-testing-library";
 import { TestApp } from "config/testing";
 
-import Home from "pages/home";
+import Home from "pages/Home";
 
 describe("<Home />", () => {
   afterEach(cleanup);
