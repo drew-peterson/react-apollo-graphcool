@@ -14,7 +14,7 @@ const Footer = () => (
 
 class App extends Component {
   render() {
-    const { Row, Column } = Grid;
+    const { Column } = Grid;
     return (
       <ErrorBoundary>
         <Provider>
@@ -23,9 +23,9 @@ class App extends Component {
               <Header />
               <Container>
                 <Grid padded>
-                  <Grid.Column>
+                  <Column>
                     <Routing />
-                  </Grid.Column>
+                  </Column>
                 </Grid>
               </Container>
               <Footer />

@@ -50,6 +50,14 @@ export const Lock = class Lock {
     this.lock.on("authorization_error", function(err) {
       console.log("err", err);
     });
+
+    this.lock.on("hide", function(props) {
+      console.log("hide", props);
+    });
+
+    this.lock.on("signin submit", function(props) {
+      console.log("signin submit", props);
+    });
   }
 
   show(options) {
