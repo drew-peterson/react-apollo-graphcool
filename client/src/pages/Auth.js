@@ -1,10 +1,17 @@
 import React, { Component } from "react";
-import { Lock } from "config/authentication";
+import { WebAuth } from "config/authentication";
 import { Query } from "react-apollo";
 import { Redirect } from "react-router-dom";
 import { USER } from "graphql/query";
 import qs from "query-string";
+import { compose } from "recompose";
 import { Grid, Header } from "semantic-ui-react";
+
+import loginForm from "components/forms/LoginForm";
+import signupForm from "components/forms/SignupForm";
+import withAuthHandlers from "components/forms/withAuthHandlers";
+const SignupForm = compose(withAuthHandlers)(signupForm);
+const LoginForm = compose(withAuthHandlers)(loginForm);
 
 class Auth extends Component {
   state = {
@@ -12,9 +19,9 @@ class Auth extends Component {
   };
   componentDidMount() {
     const { type } = qs.parse(window.location.search);
-    const auth = new Lock();
-    this.setState({ type });
-    auth.show({ initialScreen: type || "login" });
+    const auth = new WebAuth();
+    this.setState({ type, auth });
+    // auth.show({ initialScreen: type || "login" });
   }
 
   renderHeader() {
@@ -25,6 +32,8 @@ class Auth extends Component {
     return "Login here and get a bunch of cool stuff";
   }
   renderLogin() {
+    const { auth, type } = this.state;
+
     return (
       <Grid stackable centered>
         <Grid.Column width={4}>
@@ -33,7 +42,9 @@ class Auth extends Component {
           </Header>
         </Grid.Column>
         <Grid.Column width={5}>
-          <div id="hiw-login-container" />
+          {/* <div id="hiw-login-container" /> */}
+          {auth && type === "login" && <LoginForm onSubmit={auth.login} />}
+          {auth && type === "signUp" && <SignupForm onSubmit={auth.signup} />}
         </Grid.Column>
       </Grid>
     );

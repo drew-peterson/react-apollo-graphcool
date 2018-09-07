@@ -1,10 +1,47 @@
 import React from "react";
 import Auth0Lock from "auth0-lock";
+import auth0 from "auth0-js";
 import { client } from "./apollo";
 import { AUTH_USER, USER } from "graphql/query";
 import { Redirect } from "react-router-dom";
 import { Query } from "react-apollo";
 import keys from "config/keys";
+
+export const WebAuth = class WebAuth {
+  constructor() {
+    this.webAuth = new auth0.WebAuth({
+      domain: keys.AUTH0_DOMAIN,
+      clientID: keys.AUTH0_CLIENT_ID,
+      audience: keys.AUTH0_HOST,
+      responseType: "token",
+      redirectUri: keys.DOMAIN,
+      is_first_party: true
+      // sso: true
+    });
+  }
+
+  signup = ({ email, password }, cb) => {
+    this.webAuth.signup(
+      { email, password, connection: "Username-Password-Authentication" },
+      err => {
+        if (err) cb(err);
+        this.login({ email, password }, cb);
+      }
+    );
+  };
+
+  login = ({ email, password }, cb) => {
+    console.log("login");
+    this.webAuth.login(
+      {
+        realm: "Username-Password-Authentication",
+        email,
+        password
+      },
+      cb
+    );
+  };
+};
 
 export const Lock = class Lock {
   constructor() {
@@ -48,7 +85,7 @@ export const Lock = class Lock {
     });
 
     this.lock.on("authorization_error", function(err) {
-      console.log("err", err);
+      console.log("authorization_error", err);
     });
 
     this.lock.on("hide", function(props) {
