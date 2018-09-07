@@ -26,7 +26,7 @@ class Home extends Component {
     return (
       <Layout>
         <Segment style={{ height: 1000 }}>
-          <h2>Home Hi Weston</h2>
+          <h2>Home</h2>
           <p>random test here</p>
           <p>random test here</p>
         </Segment>
